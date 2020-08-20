@@ -36,7 +36,7 @@ import static org.springframework.restdocs.snippet.Attributes.key;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(RestDocumentationExtension.class)
-@AutoConfigureRestDocs
+@AutoConfigureRestDocs(uriScheme = "https", uriHost = "dev.springframework.org", uriPort = 8082)
 @WebMvcTest(BeerController.class)
 @ComponentScan(basePackages = {"spring.micro.services.spring.restdocs.web.mappers"})
 class BeerControllerTest {
