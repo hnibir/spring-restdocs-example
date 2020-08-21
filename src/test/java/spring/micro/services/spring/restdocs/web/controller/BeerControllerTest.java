@@ -21,6 +21,7 @@ import spring.micro.services.spring.restdocs.web.model.BeerDto;
 import spring.micro.services.spring.restdocs.web.model.BeerStyleEnum;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import static org.hamcrest.core.Is.is;
@@ -83,15 +84,15 @@ class BeerControllerTest {
                                 parameterWithName("iscold").description("Is Beer Cold Query param")
                         ),
                         responseFields(
-                                fieldWithPath("id").description("Id of Beer"),
-                                fieldWithPath("version").description("Version number"),
-                                fieldWithPath("createdDate").description("Date Created"),
-                                fieldWithPath("lastModifiedDate").description("Date Updated"),
-                                fieldWithPath("name").description("Beer Name"),
-                                fieldWithPath("beerStyle").description("Beer Style"),
-                                fieldWithPath("upc").description("UPC of Beer"),
-                                fieldWithPath("price").description("Price"),
-                                fieldWithPath("quantityOnHand").description("Quantity On hand")
+                                fieldWithPath("id").description("Id of Beer").type(UUID.class),
+                                fieldWithPath("version").description("Version number").type(Integer.class),
+                                fieldWithPath("createdDate").description("Date Created").type(OffsetDateTime.class),
+                                fieldWithPath("lastModifiedDate").description("Date Updated").type(OffsetDateTime.class),
+                                fieldWithPath("name").description("Beer Name").type(String.class),
+                                fieldWithPath("beerStyle").description("Beer Style").type(Enum.class),
+                                fieldWithPath("upc").description("UPC of Beer").type(Long.class),
+                                fieldWithPath("price").description("Price").type(BigDecimal.class),
+                                fieldWithPath("quantityOnHand").description("Quantity On hand").type(Integer.class)
                         )
                 ));
     }
@@ -114,15 +115,15 @@ class BeerControllerTest {
                 .andExpect(status().isCreated())
                 .andDo(document("v1/beer-new",
                         requestFields(
-                                fields.withPath("id").ignored(),
-                                fields.withPath("version").ignored(),
-                                fields.withPath("createdDate").ignored(),
-                                fields.withPath("lastModifiedDate").ignored(),
-                                fields.withPath("name").description("Name of the beer"),
-                                fields.withPath("beerStyle").description("Style of Beer"),
-                                fields.withPath("upc").description("Beer UPC").attributes(),
-                                fields.withPath("price").description("Beer price"),
-                                fields.withPath("quantityOnHand").ignored()
+                                fields.withPath("id").ignored().type(UUID.class),
+                                fields.withPath("version").ignored().type(Integer.class),
+                                fields.withPath("createdDate").ignored().type(OffsetDateTime.class),
+                                fields.withPath("lastModifiedDate").ignored().type(OffsetDateTime.class),
+                                fields.withPath("name").description("Name of the beer").type(String.class),
+                                fields.withPath("beerStyle").description("Style of Beer").type(Enum.class),
+                                fields.withPath("upc").description("Beer UPC").attributes().type(Long.class),
+                                fields.withPath("price").description("Beer price").type(BigDecimal.class),
+                                fields.withPath("quantityOnHand").ignored().type(Integer.class)
                         )));
 
     }
